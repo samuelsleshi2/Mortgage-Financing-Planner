@@ -1,14 +1,14 @@
 import java.text.NumberFormat;
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-// Prompting user for principal
+    /**
+     * Prompting user for principal
+     */
         double principal;
             while (true) {
                 System.out.print("Principal ($1K - $1M): ");
@@ -25,14 +25,17 @@ public class Main {
                 }
             }
 
-// Prompting user for annual interest
-            double annualInterest;
+    /**
+    * Prompting user for annual interest rate
+    */
+        double annualInterest;
             while (true) {
                 System.out.print("Annual interest rate (up to 30%): ");
                 if (!scanner.hasNextDouble()) {
                     scanner.next();
                     System.out.println("Enter a numeric value.");
-                } else {
+                } 
+                else {
                     annualInterest = scanner.nextDouble();
                     if (annualInterest > 0 && annualInterest <= 30) {
                         break;
@@ -43,22 +46,22 @@ public class Main {
             }
 
             // Prompting user for years
-        double years;
-        while (true) {
-            System.out.print("Period (1-30 years): ");
-            if (!scanner.hasNextDouble()) {
-                scanner.next();
-                System.out.println("Enter a numeric value.");
-            }
-            else {
-                years = scanner.nextDouble();
-                if (years > 0 && years <= 30) {
-                    break;
-                } else if (years <= 0 || years > 30) {
-                    System.out.println("Enter a value greater than 0 and less than or equal to 30");
+            double years;
+                while (true) {
+                System.out.print("Period (1-30 years): ");
+                if (!scanner.hasNextDouble()) {
+                    scanner.next();
+                    System.out.println("Enter a numeric value.");
+                }
+                else {
+                    years = scanner.nextDouble();
+                    if (years > 0 && years <= 30) {
+                        break;
+                    } else if (years <= 0 || years > 30) {
+                        System.out.println("Enter a value greater than 0 and less than or equal to 30");
+                    }
                 }
             }
-        }
 
         double monthlyInterest = annualInterest / 100 / 12;
         double numberOfPayments = years * 12;

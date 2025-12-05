@@ -1,4 +1,3 @@
-// DOM Elements
 const principalInput = document.getElementById('principal');
 const interestInput = document.getElementById('interest');
 const yearsInput = document.getElementById('years');
@@ -9,14 +8,12 @@ const totalInterestEl = document.getElementById('total-interest');
 const totalAmountEl = document.getElementById('total-amount');
 const numPaymentsEl = document.getElementById('num-payments');
 
-// Input validation ranges (matching your Java code)
 const VALIDATION_RULES = {
     principal: { min: 1000, max: 1000000 },
     interest: { min: 0.1, max: 30 },
     years: { min: 1, max: 30 }
 };
 
-// Format currency
 function formatCurrency(amount) {
     return new Intl.NumberFormat('en-US', {
         style: 'currency',
@@ -26,7 +23,6 @@ function formatCurrency(amount) {
     }).format(amount);
 }
 
-// Validate input value
 function validateInput(value, field) {
     const rules = VALIDATION_RULES[field];
     const numValue = parseFloat(value);
@@ -45,7 +41,6 @@ function validateInput(value, field) {
     return { isValid: true, value: numValue };
 }
 
-// Update input validation styling
 function updateInputValidation(input, isValid) {
     const wrapper = input.closest('.input-wrapper');
     wrapper.classList.remove('error', 'success');
@@ -61,12 +56,10 @@ function updateInputValidation(input, isValid) {
     }
 }
 
-// Calculate mortgage payment using the same formula as your Java code
 function calculateMortgage(principal, annualInterest, years) {
     const monthlyInterest = annualInterest / 100 / 12;
     const numberOfPayments = years * 12;
     
-    // Same formula as your Java code
     const mortgage = principal * 
         (monthlyInterest * Math.pow(1 + monthlyInterest, numberOfPayments) /
          (Math.pow(1 + monthlyInterest, numberOfPayments) - 1));
@@ -79,7 +72,6 @@ function calculateMortgage(principal, annualInterest, years) {
     };
 }
 
-// Show results with animation
 function showResults(results) {
     monthlyPaymentEl.textContent = formatCurrency(results.monthlyPayment);
     totalInterestEl.textContent = formatCurrency(results.totalInterest);
@@ -89,55 +81,44 @@ function showResults(results) {
     resultsSection.classList.add('show');
 }
 
-// Hide results
+
 function hideResults() {
     resultsSection.classList.remove('show');
 }
 
-// Handle calculate button click
 function handleCalculate() {
-    // Get input values
     const principalValue = principalInput.value.trim();
     const interestValue = interestInput.value.trim();
     const yearsValue = yearsInput.value.trim();
     
-    // Validate all inputs
     const principalValidation = validateInput(principalValue, 'principal');
     const interestValidation = validateInput(interestValue, 'interest');
     const yearsValidation = validateInput(yearsValue, 'years');
     
-    // Update validation styling
     updateInputValidation(principalInput, principalValidation.isValid);
     updateInputValidation(interestInput, interestValidation.isValid);
     updateInputValidation(yearsInput, yearsValidation.isValid);
     
-    // Check if all inputs are valid
     if (!principalValidation.isValid || !interestValidation.isValid || !yearsValidation.isValid) {
         hideResults();
         return;
     }
     
-    // Show loading state
     calculateBtn.classList.add('loading');
     
-    // Simulate calculation delay for better UX
     setTimeout(() => {
-        // Calculate mortgage
         const results = calculateMortgage(
             principalValidation.value,
             interestValidation.value,
             yearsValidation.value
         );
         
-        // Show results
         showResults(results);
         
-        // Remove loading state
         calculateBtn.classList.remove('loading');
     }, 500);
 }
 
-// Real-time validation on input
 function handleInputValidation(input, field) {
     const value = input.value.trim();
     
@@ -150,15 +131,12 @@ function handleInputValidation(input, field) {
     updateInputValidation(input, validation.isValid);
 }
 
-// Event listeners
 calculateBtn.addEventListener('click', handleCalculate);
 
-// Real-time validation
 principalInput.addEventListener('input', () => handleInputValidation(principalInput, 'principal'));
 interestInput.addEventListener('input', () => handleInputValidation(interestInput, 'interest'));
 yearsInput.addEventListener('input', () => handleInputValidation(yearsInput, 'years'));
 
-// Enter key support
 [principalInput, interestInput, yearsInput].forEach(input => {
     input.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
@@ -167,7 +145,6 @@ yearsInput.addEventListener('input', () => handleInputValidation(yearsInput, 'ye
     });
 });
 
-// Auto-calculate when all fields are filled
 function checkAutoCalculate() {
     const allInputs = [principalInput, interestInput, yearsInput];
     const allFilled = allInputs.every(input => {
@@ -182,35 +159,27 @@ function checkAutoCalculate() {
     }
 }
 
-// Auto-calculate on input change
 [principalInput, interestInput, yearsInput].forEach(input => {
     input.addEventListener('blur', checkAutoCalculate);
 });
 
-// Initialize with some default values for demo
 window.addEventListener('load', () => {
-    // Set some reasonable default values
     principalInput.value = '300000';
     interestInput.value = '5.5';
     yearsInput.value = '30';
     
-    // Trigger validation styling
     handleInputValidation(principalInput, 'principal');
     handleInputValidation(interestInput, 'interest');
     handleInputValidation(yearsInput, 'years');
     
-    // Auto-calculate with defaults
     setTimeout(checkAutoCalculate, 100);
 });
 
-// Add some helpful tooltips and accessibility
 document.addEventListener('DOMContentLoaded', () => {
-    // Add ARIA labels for accessibility
     principalInput.setAttribute('aria-label', 'Principal amount in dollars');
     interestInput.setAttribute('aria-label', 'Annual interest rate in percentage');
     yearsInput.setAttribute('aria-label', 'Loan term in years');
     
-    // Add helpful hints
     const inputs = [principalInput, interestInput, yearsInput];
     inputs.forEach(input => {
         input.addEventListener('focus', () => {
