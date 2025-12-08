@@ -14,7 +14,7 @@ A monthly mortgage payment calculator project featuring both a Java console inte
 * **Input Validation:** Ensures all loan parameters (principal, rate, term) are valid before processing.
 * **Console-Based Logic:** Runs calculations directly in the terminal.
 
-## Technologies Used
+## Tech Stack
 
 * **Languages:** Java, JavaScript
 * **Frontend:** HTML, CSS
