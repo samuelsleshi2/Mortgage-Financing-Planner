@@ -2,7 +2,7 @@
 
 A monthly mortgage payment calculator project featuring both a Java console interface and a responsive frontend. This web app helps users calculate monthly mortgage payments with real-time feedback.
 
-## 🚀 Features
+## Features
 
 ### Web Interface
 * **Real-Time Calculations:** Instantly computes financial metrics as users input data.
@@ -14,7 +14,7 @@ A monthly mortgage payment calculator project featuring both a Java console inte
 * **Input Validation:** Ensures all loan parameters (principal, rate, term) are valid before processing.
 * **Console-Based Logic:** Runs calculations directly in the terminal.
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 * **Languages:** Java, JavaScript
 * **Frontend:** HTML, CSS
